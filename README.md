@@ -1,6 +1,6 @@
-# 🌱 Project Bereshit
+# 🌱 Project Bereshet
 
-**Bereshit** (בְּרֵאשִׁית) — *"In the beginning"*  
+**Bereshet** (בְּרֵאשִׁית) — *"In the beginning"*  
 A modern platform connecting junior developers with tech companies.
 
 ---
