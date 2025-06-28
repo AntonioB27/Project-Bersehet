@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +23,8 @@ public class Post {
     private String description;
     private Integer price;
     private String imageUrl;
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private BookCategory category;
     private String seller;
     private String status;
     private LocalDateTime createdAt;

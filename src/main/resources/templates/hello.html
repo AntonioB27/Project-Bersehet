@@ -77,9 +77,30 @@
       </li>
     </ul>
   </div>
-  <div class="w-full max-w-2xl mt-12">
-    <h1 class="text-2xl font-bold mb-4 text-center" style="color: #03A6A1;">Welcome to Bereshet!</h1>
-    <p class="text-center" style="color: #FF4F0F;">Explore the latest posts and connect with our community.</p>
+  <div class="w-full max-w-2xl mt-12" id="quote-block">
+  <div>
+    <h1 class="text-2xl font-bold mb-4 text-center" style="color: #03A6A1;">Book Quote of the Moment</h1>
+    <p id="quote-text" class="text-center text-lg" style="color: #FF4F0F;">Loading quote...</p>
+    <p id="quote-author" class="text-center mt-2 text-sm" style="color: #03A6A1;"></p>
+    <p id="quote-book" class="text-center mt-2 text-xs" style="color: #FFA673;"></p>
+  </div>
+</div>
+<script>
+  fetch('/book_quotes_1000.json')
+    .then(response => response.json())
+    .then(data => {
+      const random = Math.floor(Math.random() * data.length);
+      const quote = data[random];
+      document.getElementById('quote-text').textContent = `"${quote.quote}"`;
+      document.getElementById('quote-author').textContent = quote.author ? `— ${quote.author}` : '';
+      document.getElementById('quote-book').textContent = quote.book ? `from "${quote.book}"` : '';
+    })
+    .catch(() => {
+      document.getElementById('quote-text').textContent = "Could not load quote at this time.";
+      document.getElementById('quote-author').textContent = "";
+      document.getElementById('quote-book').textContent = "";
+    });
+</script>
   </div>
 </body>
 </html>

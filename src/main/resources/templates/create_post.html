@@ -29,7 +29,10 @@
                 </div>
                 <div>
                     <label class="block" style="color: #03A6A1;">Category</label>
-                    <input type="text" th:field="*{category}" class="w-full border rounded px-3 py-2" style="border-color: #FFA673;"/>
+                    <select th:field="*{category}" class="w-full border rounded px-3 py-2" style="border-color: #FFA673;" required>
+                        <option th:each="cat : ${T(dev.bereshet.bereshet.entities.BookCategory).values()}"
+                                th:value="${cat}" th:text="${cat}"></option>
+                    </select>
                 </div>
                 <div>
                     <label class="block" style="color: #03A6A1;">Image URL</label>
