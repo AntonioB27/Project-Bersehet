@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import dev.bereshet.bereshet.entities.User;
+import dev.bereshet.bereshet.helpers.PasswordHelper;
 import dev.bereshet.bereshet.repositories.UserRepository;
 
 
@@ -34,18 +35,23 @@ public class RegisterController {
     }
 
     /**
-     * Handles HTTP POST requests for user registration.
-     * Encodes the user's password, saves the user to the repository,
-     * and returns the "hello" view upon successful registration.
+     * Handles user registration requests.
+     * 
+     * Validates the user's password and, if valid, encodes and saves the user to the repository.
+     * If the password is invalid, returns the registration page with an error message.
      *
-     * @param user  the User object populated from the registration form
-     * @param model the Model object for passing attributes to the view
-     * @return the name of the view to render ("hello")
+     * @param user  the user object populated from the registration form
+     * @param model the model to pass attributes to the view
+     * @return the name of the view to render ("register" if validation fails, "login" on success)
      */
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user, Model model) {
+        if(!PasswordHelper.isPassvordValid(user.getPassword())){
+            model.addAttribute("error", "Password must be at least 8 characters long.");
+            return "register";
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return "hello";
+        return "login";
     }
 }

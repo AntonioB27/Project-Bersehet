@@ -46,12 +46,8 @@ public class LoginController {
      */
     @PostMapping("/login")
     public String loginUser(@ModelAttribute User user, Model model, HttpSession session) {
-        User found = userRepository.findAll().stream()
-            .filter(u -> u.getUsername().equals(user.getUsername()) && passwordEncoder.matches(user.getPassword(), u.getPassword()))
-            .findFirst()
-            .orElse(null);
-
-        if (found != null) {
+        User found = userRepository.findByUsername(user.getUsername());
+        if (found != null && passwordEncoder.matches(user.getPassword(), found.getPassword())) {
             session.setAttribute("loggedInUser", found.getUsername());
             return "redirect:/";
         } else {
@@ -60,6 +56,12 @@ public class LoginController {
         }
     }
 
+    /**
+     * Handles user logout by removing the "loggedInUser" attribute from the session.
+     * 
+     * @param session the current HTTP session
+     * @return the name of the view to display after logout ("logout")
+     */
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("loggedInUser");

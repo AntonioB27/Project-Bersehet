@@ -7,13 +7,20 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
   <div th:replace="~{fragments :: sidebar}"></div>
-  <div class="bg-white p-8 rounded shadow text-center">
-    <h1 class="text-4xl font-bold text-blue-600 mb-4">Hello, Users!</h1>
+  <div class="mt-8">
+    <h2 class="text-xl font-bold mb-4">Latest Posts</h2>
     <ul>
-      <li th:each="user : ${users}" class="text-gray-700">
-        <span th:text="${user.username}"></span>
-      </li>
+        <li th:each="post : ${posts}" class="mb-2 p-2 border rounded bg-white">
+            <span class="font-semibold" th:text="${post.title}"></span>
+            by <span th:text="${post.author}"></span>
+            <span class="text-gray-600">| $</span><span th:text="${post.price}"></span>
+            <div th:text="${post.description}"></div>
+        </li>
     </ul>
+</div>
+  <div class="ml-52 mt-8">
+    <h1 class="text-2xl font-bold mb-6 text-center text-blue-600">Welcome to Bereshet!</h1>
+    <p class="text-center text-gray-700">Explore the latest posts and connect with our community.</p>
   </div>
 </body>
 </html>
