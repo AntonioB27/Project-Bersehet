@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="sidebar">
+        <div class="fixed top-0 left-0 h-full w-48 bg-blue-700 flex flex-col items-center py-8 space-y-4 shadow-lg">
+            <a href="/" class="w-40 text-center py-2 rounded text-white bg-blue-600 hover:bg-blue-500 font-semibold transition">Home</a>
+            <a href="/login" class="w-40 text-center py-2 rounded text-white bg-blue-600 hover:bg-blue-500 font-semibold transition" th:if="${session.loggedInUser == null}">Login</a>
+            <a href="/register" class="w-40 text-center py-2 rounded text-white bg-blue-600 hover:bg-blue-500 font-semibold transition" th:if="${session.loggedInUser == null}">Register</a>
+        </div>
+    </div>
+</body>
+</html>
