@@ -13,7 +13,7 @@ public class HelloController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping({"/", "/hello"})
+    @GetMapping("/")
     public String hello(Model model) {
         model.addAttribute("users", userRepository.findAll());
         return "hello";
